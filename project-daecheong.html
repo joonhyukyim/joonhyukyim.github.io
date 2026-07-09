@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대청마루 | 임준혁 포트폴리오</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #1a2b4a;
+        --navy-light: #243760;
+        --teal: #00a8c6;
+        --teal-light: #e6f7fb;
+        --white: #ffffff;
+        --gray-50: #f5f7fa;
+        --gray-100: #eef1f6;
+        --gray-300: #c8d0dc;
+        --gray-500: #7a8899;
+        --gray-700: #3d4f63;
+        --text: #1a2b4a;
+        --sidebar-w: 260px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Noto Sans KR", "Inter", sans-serif;
+        background: var(--gray-50);
+        color: var(--text);
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* SIDEBAR (same as other pages) */
+      .sidebar {
+        width: var(--sidebar-w);
+        min-height: 100vh;
+        background: var(--navy);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+      }
+      .sidebar-top {
+        padding: 36px 28px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .sidebar-name {
+        font-family: "Inter";
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .sidebar-role {
+        font-size: 12px;
+        color: var(--teal);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+      .sidebar-nav {
+        padding: 20px 0;
+        flex: 1;
+      }
+      .nav-section-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        color: var(--gray-500);
+        padding: 16px 28px 8px;
+        text-transform: uppercase;
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 28px;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        font-size: 13.5px;
+        transition: all 0.2s;
+        border-left: 3px solid transparent;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.06);
+        border-left-color: var(--teal);
+      }
+      .nav-link .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        flex-shrink: 0;
+      }
+      .nav-link.active .dot {
+        background: var(--teal);
+      }
+      .sidebar-contact {
+        padding: 20px 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .contact-item {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-bottom: 6px;
+      }
+      .contact-item a {
+        color: var(--teal);
+        text-decoration: none;
+      }
+
+      .main {
+        margin-left: var(--sidebar-w);
+        flex: 1;
+      }
+
+      /* HERO */
+      .project-hero {
+        background: var(--navy);
+        padding: 60px 64px 52px;
+        position: relative;
+        overflow: hidden;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        margin-bottom: 28px;
+      }
+      .back-link:hover {
+        color: var(--teal);
+      }
+      .project-badge {
+        display: inline-flex;
+        gap: 8px;
+        background: rgba(0, 168, 198, 0.15);
+        border: 1px solid rgba(0, 168, 198, 0.3);
+        border-radius: 20px;
+        padding: 5px 14px;
+        font-size: 11.5px;
+        color: var(--teal);
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+      .project-hero-title {
+        font-size: 38px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
+      .project-hero-meta {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        font-family: "Inter";
+        margin-bottom: 28px;
+      }
+      .project-hero-desc {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        max-width: 600px;
+      }
+      .role-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+      .role-tag {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: "Inter";
+      }
+
+      /* SUMMARY */
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        background: var(--navy-light);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .summary-card {
+        padding: 24px 28px;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .summary-card:last-child {
+        border-right: none;
+      }
+      .summary-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.4);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .summary-value {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.85);
+        font-family: "Inter";
+        line-height: 1.5;
+      }
+
+      /* SECTION */
+      .section {
+        padding: 48px 64px;
+        border-bottom: 1px solid var(--gray-100);
+        background: var(--white);
+      }
+      .section:nth-child(even) {
+        background: var(--gray-50);
+      }
+      .section-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: var(--teal);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 32px;
+        letter-spacing: -0.4px;
+      }
+
+      /* ACHIEVEMENT */
+      .achievement-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .achievement-card {
+        background: var(--white);
+        border: 1px solid var(--gray-100);
+        border-radius: 12px;
+        padding: 24px;
+      }
+      .section:nth-child(even) .achievement-card {
+        background: var(--white);
+      }
+      .achievement-icon {
+        display: none;
+      }
+      .achievement-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 10px;
+        padding-left: 12px;
+        border-left: 3px solid var(--teal);
+      }
+      .achievement-desc {
+        font-size: 13px;
+        color: var(--gray-700);
+        line-height: 1.75;
+      }
+
+      /* PS CARD */
+      .ps-card {
+        background: var(--white);
+        border: 1px solid var(--gray-100);
+        border-radius: 14px;
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
+      .ps-card:last-child {
+        margin-bottom: 0;
+      }
+      .ps-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .ps-col {
+        padding: 24px 26px;
+        border-right: 1px solid var(--gray-100);
+      }
+      .ps-col:last-child {
+        border-right: none;
+      }
+      .ps-col-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+      .label-problem {
+        background: #fef3f2;
+        color: #d92d20;
+      }
+      .label-solution {
+        background: var(--teal-light);
+        color: #007a94;
+      }
+      .label-result {
+        background: #ecfdf3;
+        color: #027a48;
+      }
+      .ps-col p,
+      .ps-col ul {
+        font-size: 13px;
+        color: var(--gray-700);
+        line-height: 1.75;
+      }
+      .ps-col ul {
+        list-style: none;
+      }
+      .ps-col ul li {
+        padding-left: 14px;
+        position: relative;
+        margin-bottom: 5px;
+      }
+      .ps-col ul li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--teal);
+        font-size: 11px;
+        top: 2px;
+      }
+      .ps-col strong {
+        color: var(--navy);
+      }
+
+      /* METRIC TABLE */
+      .metric-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1px solid var(--gray-100);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 16px;
+        font-family: "Inter", sans-serif;
+      }
+      .metric-table th {
+        background: var(--navy);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        padding: 12px 18px;
+        text-align: left;
+      }
+      .metric-table td {
+        padding: 12px 18px;
+        font-size: 13px;
+        color: var(--gray-700);
+        border-top: 1px solid var(--gray-100);
+        background: var(--white);
+      }
+      .metric-highlight {
+        color: var(--navy);
+        font-weight: 700;
+      }
+
+      /* CODE */
+      .code-block {
+        background: #0f1923;
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin-top: 10px;
+        overflow-x: auto;
+      }
+      .code-block code {
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        color: #a8d8a8;
+        line-height: 1.7;
+        white-space: pre;
+        display: block;
+      }
+      .code-comment {
+        color: #6b7b8d;
+      }
+      .code-key {
+        color: #79b8ff;
+      }
+      .code-val {
+        color: #f0a500;
+      }
+
+      /* STAT BOX */
+      .stat-box {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-100);
+        border-radius: 10px;
+        padding: 16px 18px;
+        margin-bottom: 10px;
+      }
+      .stat-box-label {
+        font-size: 11px;
+        color: var(--gray-500);
+        margin-bottom: 4px;
+      }
+      .stat-box-value {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--navy);
+        font-family: "Inter";
+      }
+      .stat-box-sub {
+        font-size: 12px;
+        color: var(--gray-700);
+        margin-top: 2px;
+      }
+      .stat-box.green {
+        background: var(--gray-50);
+      }
+      .stat-box.green .stat-box-value {
+        color: var(--navy);
+      }
+
+      /* FOOTER */
+      .footer {
+        background: var(--navy);
+        padding: 28px 64px;
+        text-align: center;
+      }
+      .footer p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.3);
+        font-family: "Inter";
+      }
+
+      @media (max-width: 900px) {
+        .sidebar {
+          width: 220px;
+        }
+        .main {
+          margin-left: 220px;
+        }
+        .project-hero,
+        .section {
+          padding: 40px 28px;
+        }
+        .summary-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .ps-row {
+          grid-template-columns: 1fr;
+        }
+        .achievement-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-name">Yim Joon Hyuk</div>
+        <div class="sidebar-role">DevOps Engineer</div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <a href="index.html" class="nav-link"
+          ><span class="dot"></span>About Me</a
+        >
+        <div class="nav-section-label">Projects</div>
+        <a href="project-developer.html" class="nav-link"
+          ><span class="dot"></span>개발자 키우기</a
+        >
+        <a href="project-daecheong.html" class="nav-link active"
+          ><span class="dot"></span>대청마루</a
+        >
+      </div>
+      <div class="sidebar-contact">
+        <div class="contact-item">📞 010-3931-2933</div>
+        <div class="contact-item">
+          ✉️ <a href="mailto:mika980409@gmail.com">mika980409@gmail.com</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main">
+      <!-- HERO -->
+      <div class="project-hero">
+        <a href="index.html" class="back-link">← 포트폴리오 홈</a>
+        <div class="project-hero-title">대청마루</div>
+        <div class="project-hero-meta">
+          2025.09 – 2025.12 &nbsp;·&nbsp; 1인 프로젝트 (FE + BE + Cloud Infra
+          Engineer)
+        </div>
+        <p class="project-hero-desc">
+          전통 한옥의 '마루'에서 착안한 소통 중심의 온라인 커뮤니티 서비스.
+          회원관리, 게시글/댓글/좋아요 등 커뮤니티 핵심 기능을 직접 설계하고
+          클라우드 배포까지 단독으로 진행한 풀스택 프로젝트입니다.
+        </p>
+        <div class="role-tags">
+          <span class="role-tag"
+            >풀스택 개발 · 클라우드 배포까지 단독 진행</span
+          >
+          <span class="role-tag"
+            >무중단 배포를 위한 CI/CD 파이프라인 설계 및 구현</span
+          >
+          <a
+            href="#"
+            style="
+              background: rgba(0, 168, 198, 0.2);
+              border: 1px solid rgba(0, 168, 198, 0.4);
+              border-radius: 6px;
+              padding: 5px 12px;
+              font-size: 12px;
+              color: var(--teal);
+              text-decoration: none;
+            "
+            >▶ 시연영상 바로 가기</a
+          >
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-label">Throughput</div>
+          <div class="summary-value">
+            임계 처리량<br />47 → 1,200 RPS
+            <span style="color: var(--white)">25배 ↑</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Response Time</div>
+          <div class="summary-value">
+            인기글 조회 응답<br />25.19s →
+            <span style="color: var(--white)">6.54ms</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Docker Image</div>
+          <div class="summary-value">
+            이미지 경량화<br />511MB → 139MB
+            <span style="color: var(--white)">72.8% ↓</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Cost Optimization</div>
+          <div class="summary-value">
+            NAT 인프라 비용<br />$30 → $5/월
+            <span style="color: var(--white)">80% ↓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN ACHIEVEMENTS -->
+      <section class="section">
+        <div class="section-eyebrow">Key Achievements</div>
+        <div class="section-title">주요 성과 요약</div>
+        <div class="achievement-grid">
+          <div class="achievement-card">
+            <div class="achievement-title">
+              대규모 트래픽 대비 병목 지점 식별 및 성능 최적화
+            </div>
+            <div class="achievement-desc">
+              로직 튜닝부터 아키텍처 재설계까지 변수를 통제하며 단계적으로
+              병목을 제거. 최종적으로는 Redis를 도입해 데이터 정합성 문제까지
+              해결.
+            </div>
+          </div>
+          <div class="achievement-card">
+            <div class="achievement-title">
+              비용 효율적 클라우드 아키텍처 및 보안망 설계
+            </div>
+            <div class="achievement-desc">
+              NAT Instance로 고정 인프라 비용 80% 절감. Pre-signed URL 도입으로
+              컴퓨팅 낭비 방지. Private Subnet 격리 및 Nginx SSL Termination으로
+              성능 오버헤드와 보안 위협을 방어.
+            </div>
+          </div>
+          <div class="achievement-card">
+            <div class="achievement-title">
+              무중단 배포를 위한 CI/CD 파이프라인 고도화
+            </div>
+            <div class="achievement-desc">
+              동적 IP 환경에서 AWS CodeDeploy 연동 아키텍처로 개편. Health Check
+              기반 자동 롤백 메커니즘 구현으로 배포 시 트래픽 유실 방지.
+            </div>
+          </div>
+          <div class="achievement-card">
+            <div class="achievement-title">컨테이너 경량화 및 보안 강화</div>
+            <div class="achievement-desc">
+              멀티 스테이지 빌드 및 레이어드 캐싱 도입으로 Docker 이미지 72.8%
+              경량화 및 배포 속도 단축. User 권한 설정과 .env 파일 동적 파기를
+              통해 인프라 레벨의 보안 공격 표면 최소화.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DB BOTTLENECK 1 -->
+      <section class="section">
+        <div class="section-eyebrow">Performance · Detail 1</div>
+        <div class="section-title">단일 RDB 병목 분석 및 1차 성능 최적화</div>
+        <div class="ps-card">
+          <div class="ps-body">
+            <div class="ps-row">
+              <div class="ps-col">
+                <span class="ps-col-label label-problem">문제</span>
+                <p><strong>[단일 RDB 병목 지점 확인]</strong></p>
+                <p>
+                  MySQL만 사용하던 때 좋아요 여부를 저장하는 테이블과 게시글의
+                  like_count를 분리해서 관리. 당시에는 좋아요 저장과 카운트
+                  갱신을 서로 독립된 작업으로 생각해 REQUIRES_NEW 전파 속성을
+                  사용. 하지만 이것 때문에
+                  <strong>하나의 요청이 동시에 두 개의 커넥션을 점유</strong
+                  >하는 쓰기 병목 발생. 또, 좋아요/조회수 이벤트가 발생할 때마다
+                  MySQL UPDATE가 실행되어 쓰기 부하가 증가,
+                  <strong>3.19 TPS에서도 한계에 도달</strong>.
+                </p>
+                <br />
+                <p><strong>[인기글 기능 도입]</strong></p>
+                <p>
+                  인기글 목록 기능은 실시간 지표를 기반으로 지속적인 정렬 및
+                  조회가 필요해 읽기/쓰기 부하가 동시에 증가, 30 RPS 수준의
+                  부하에서도 <strong>p(95) 14초 이상 걸리는 문제 발생</strong>.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-solution">해결</span>
+                <ul>
+                  <li>REQUIRED <strong>단일 트랜잭션 구조</strong>로 재설계</li>
+                  <li>
+                    카운트 증가 이벤트를 <strong>메모리에서 우선 집계</strong>
+                  </li>
+                  <li>
+                    스케줄러로 일정 주기마다 <strong>DB에 일괄 반영</strong>
+                  </li>
+                </ul>
+                <br />
+                <p><strong>[인기글 인덱스 최적화]</strong></p>
+                <p>
+                  EXPLAIN을 통해 인기글 조회 쿼리에 풀스캔이 발생한다는 것을
+                  확인, 인기글 점수 계산의 로직에 맞춰
+                  <strong>인덱스(created_at)를 추가</strong>해 최근 7일 게시물로
+                  대상을 제한해 스캔 범위를 축소.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-result">성과</span>
+                <div class="stat-box">
+                  <div class="stat-box-label">
+                    Connection 점유 감소, UPDATE 빈도 감소, DB 접근 감소
+                  </div>
+                  <div class="stat-box-value">157.29 TPS</div>
+                  <div class="stat-box-sub">
+                    초당 처리량 약 50배 향상 (3.19 → 157.29 TPS)
+                  </div>
+                </div>
+                <div class="stat-box green">
+                  <div class="stat-box-label">인기글 쿼리 수행 시간</div>
+                  <div class="stat-box-value">77.5ms → 24.3ms</div>
+                  <div class="stat-box-sub">약 3배 개선</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-box-label">
+                    p(95) 응답 개선 (50 RPS 부하 기준)
+                  </div>
+                  <div class="stat-box-value">14.24s → 4.9s</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REDIS SHARED STATE -->
+      <section class="section">
+        <div class="section-eyebrow">Performance · Detail 2</div>
+        <div class="section-title">
+          Write-behind 구조의 한계와 Shared State 필요성
+        </div>
+        <div class="ps-card">
+          <div class="ps-body">
+            <div class="ps-row">
+              <div class="ps-col">
+                <span class="ps-col-label label-problem">문제</span>
+                <p><strong>ASG 인프라 환경에서의 정합성 문제 발생</strong></p>
+                <p>
+                  게시글의 메타데이터를 인메모리에 저장하기 때문에 웹 서버를
+                  다중 인스턴스로 확장하면 각
+                  <strong>인스턴스간 상태 불일치 문제 발생</strong>. 인스턴스
+                  축소 시, 서버 로컬 메모리에 머물러 있던
+                  <strong>데이터가 유실되는 결함 확인</strong>.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-solution">해결</span>
+                <p><strong>Redis 기반 Shared State 아키텍처 도입</strong></p>
+                <ul>
+                  <li>
+                    모든 WAS가 동일한 Counter를 사용하는
+                    <strong>Shared State 구조로 전환</strong>
+                  </li>
+                  <li>
+                    좋아요/조회수/댓글수 카운터를 <strong>Redis로 이관</strong>
+                  </li>
+                  <li>
+                    INCR 기반 원자적 증가로 분산 환경에서도
+                    <strong>갱신 손실 방지</strong>
+                  </li>
+                  <li>5분 주기 Bulk Update 파이프라인 구축</li>
+                  <li>Redis Sorted Set 기반 인기글 랭킹 구현</li>
+                </ul>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-result">성과</span>
+                <p><strong>Redis를 Shared State로 활용</strong></p>
+                <p>
+                  단순 캐시 서버 추가가 아닌
+                  <strong
+                    >Stateful한 서버 구조를 Stateless 아키텍처로 전환</strong
+                  >하고, Auto Scaling 환경에서도 데이터 정합성과 수평 확장성을
+                  동시에 확보.
+                </p>
+                <table class="metric-table">
+                  <thead>
+                    <tr>
+                      <th>항목</th>
+                      <th>개선 전</th>
+                      <th>개선 후</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>임계 처리량</td>
+                      <td>47 RPS</td>
+                      <td class="metric-highlight">1,200 RPS</td>
+                    </tr>
+                    <tr>
+                      <td>인기글 조회 응답</td>
+                      <td>25.19s</td>
+                      <td class="metric-highlight">6.54ms</td>
+                    </tr>
+                    <tr>
+                      <td>Counter Storage</td>
+                      <td>Local Memory</td>
+                      <td class="metric-highlight">Redis Sorted Set</td>
+                    </tr>
+                    <tr>
+                      <td>Scale-in 시 유실</td>
+                      <td>발생</td>
+                      <td class="metric-highlight">해결</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOUD ARCH -->
+      <section class="section">
+        <div class="section-eyebrow">Cloud Architecture</div>
+        <div class="section-title">
+          트레이드오프를 고려한 클라우드 아키텍처 의사결정
+        </div>
+        <div class="ps-card" style="margin-bottom: 24px">
+          <div class="ps-body">
+            <div class="ps-row">
+              <div class="ps-col">
+                <span class="ps-col-label label-problem">문제</span>
+                <p><strong>비용과 운영성을 고려한 NAT</strong></p>
+                <p>
+                  보안을 위해 Private 서브넷에 인스턴스를 위치시켰지만, 초기
+                  서비스 규모에서는 NAT Gateway의
+                  <strong>높은 고정 비용이 부담</strong>.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-solution">해결</span>
+                <p>
+                  사용자 트래픽이 아닌 배포, 이미지 Pull, 패키지 업데이트 등의
+                  <strong>관리 목적의 트래픽만 NAT를 통과</strong>하는 구조임을
+                  고려하여, <strong>EC2 기반 NAT Instance를 구축</strong>하고
+                  Bastion 역할을 통합.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-result">성과</span>
+                <div class="stat-box green">
+                  <div class="stat-box-label">NAT 유지 비용</div>
+                  <div class="stat-box-value">$30 → $5 / 월</div>
+                  <div class="stat-box-sub">
+                    80% 절감. 초기 서비스 규모에서는 관리형 서비스의 가용성보다
+                    비용 효율을 우선해 결정.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ps-card">
+          <div class="ps-body">
+            <div class="ps-row">
+              <div class="ps-col">
+                <span class="ps-col-label label-problem">문제</span>
+                <p><strong>이미지 업로드 구조</strong></p>
+                <p>
+                  사용자가 이미지 업로드 시
+                  <strong>모든 파일이 WAS를 거쳐 처리</strong>되어 네트워크,
+                  컴퓨팅 자원이 불필요하게 소모.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-solution">해결</span>
+                <p>
+                  <strong>Pre-signed URL을 활용</strong>해 클라이언트 → S3 직접
+                  업로드하는 구조로 변경하여 서버를 업로드 경로에서 제외.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-result">성과</span>
+                <ul>
+                  <li>서버를 거치는 미디어 트래픽 제거</li>
+                  <li>WAS의 컴퓨팅 비용 감소</li>
+                  <li>
+                    애플리케이션을 업로드 경로에서 제거하여
+                    <strong>서비스와 파일 전송을 분리</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CICD -->
+      <section class="section">
+        <div class="section-eyebrow">CI/CD Pipeline</div>
+        <div class="section-title">
+          배포 안정성과 효율을 고려한 CI/CD 파이프라인 설계
+        </div>
+        <div class="ps-card" style="margin-bottom: 24px">
+          <div class="ps-body">
+            <div class="ps-row">
+              <div class="ps-col">
+                <span class="ps-col-label label-problem">문제</span>
+                <p><strong>무중단 배포</strong></p>
+                <p>
+                  기존 배포 방식은 서비스 업데이트 시 일시적인 서비스 중단이
+                  존재. 새로운 버전이 정상 실행되지 않은 상태에서 트래픽이
+                  전환되면 서비스 장애 발생.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-solution">해결</span>
+                <p>
+                  <strong>Blue-Green 배포를 적용</strong>하고, Health Check 성공
+                  이후에만 Nginx에서 트래픽을 전환하도록 설계, 배포 실패 시에는
+                  기존 환경을 유지하도록 <strong>자동 롤백을 구성</strong>.
+                </p>
+                <p
+                  style="
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--gray-500);
+                  "
+                >
+                  파이프라인: 코드 푸시 → 빌드 & 테스트(Maven/JUnit) → Docker
+                  빌드(Multi-stage) → 이미지 푸시 → CD 트리거 → Blue/Green
+                  Health Check → 트래픽 전환 또는 자동 롤백
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-result">성과</span>
+                <div class="stat-box">
+                  <div class="stat-box-label">배포 중 다운타임</div>
+                  <div class="stat-box-value">0초 달성</div>
+                </div>
+                <p
+                  style="
+                    font-size: 13px;
+                    color: var(--gray-700);
+                    margin-top: 8px;
+                  "
+                >
+                  Health Check 실패 시 자동 롤백, 배포 실패가 사용자 장애로
+                  이어지지 않는 구조 확보.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ps-card">
+          <div class="ps-body">
+            <div class="ps-row">
+              <div class="ps-col">
+                <span class="ps-col-label label-problem">문제</span>
+                <p><strong>Docker 이미지 최적화</strong></p>
+                <p>
+                  Docker 이미지 크기가 커 빌드와 배포 시간이 증가. Root 권한
+                  실행으로 <strong>컨테이너 보안 위험</strong>이 존재.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-solution">해결</span>
+                <p>
+                  <strong>Multi-stage Build</strong>와 Layered JAR를 적용하여
+                  변경 레이어만 재빌드하도록 개선, 컨테이너를
+                  <strong>Non-root User로 실행</strong>하도록 변경.
+                </p>
+              </div>
+              <div class="ps-col">
+                <span class="ps-col-label label-result">성과</span>
+                <table class="metric-table">
+                  <thead>
+                    <tr>
+                      <th>항목</th>
+                      <th>최적화 전</th>
+                      <th>최적화 후</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>이미지 크기</td>
+                      <td>511 MB</td>
+                      <td class="metric-highlight">139 MB (72.8% ↓)</td>
+                    </tr>
+                    <tr>
+                      <td>빌드/푸시 시간</td>
+                      <td>3분 20초</td>
+                      <td class="metric-highlight">1분 10초 (65% ↓)</td>
+                    </tr>
+                    <tr>
+                      <td>보안 상태</td>
+                      <td>Root 권한 실행</td>
+                      <td class="metric-highlight">Non-root 실행</td>
+                    </tr>
+                    <tr>
+                      <td>아키텍처</td>
+                      <td>단일 빌드 (JDK)</td>
+                      <td class="metric-highlight">Multi-stage + JRE-Alpine</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>© 2026 Yim Joon Hyuk · mika980409@gmail.com</p>
+      </footer>
+    </main>
+  </body>
+</html>
